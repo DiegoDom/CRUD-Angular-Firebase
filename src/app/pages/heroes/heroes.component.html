@@ -1,0 +1,51 @@
+<div class="row mt-3">
+    <div class="col-12 animated fadeIn slow">
+        <h1>Listado de heroes</h1>
+        <hr>
+    </div>
+    <div class="col-12">
+        <button *ngIf="!cargando" type="button" class="btn btn-outline-primary btn-sm mb-2 animated fadeInLeftBig faster float-right" routerLink="/heroe/nuevo">
+            <li class="fa fa-plus"></li>
+             Agregar
+        </button>
+        <table class="table table-striped table-hover table-responsive-md
+            animated fadeInDownBig faster" *ngIf="heros.length && !cargando">
+            <thead class="thead-primary">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Poder</th>
+                    <th scope="col">Vivo</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let hero of heros; let i = index;">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ hero.name }}</td>
+                    <td>{{ hero.power }}</td>
+                    <td>
+                        <span *ngIf="hero.alive" class="badge badge-success">Vivo</span>
+                        <span *ngIf="!hero.alive" class="badge badge-danger">Muerto</span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary btn-sm mr-2" [routerLink]="['/heroe', hero.id]"><li class="fa fa-pencil"></li></button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteHero(hero, i)"><li class="fa fa-trash"></li></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div *ngIf="cargando" class="alert alert-primary text-center mt-5 animated fadeInUpBig faster">
+            <h4 class="alert-heading">Cargando...</h4>
+            <i class="fa fa-refresh fa-spin fa-3x" aria-hidden="true"></i>
+            <p class="mt-2 mb-0">Espere por favor</p>
+        </div>
+
+        <div *ngIf="!heros.length && !cargando" class="alert alert-warning text-center mt-5 animated fadeInDownBig faster">
+            <h4 class="alert-heading">No se encontraron registros...</h4>
+            <i class="fa fa-exclamation-triangle fa-3x" aria-hidden="true"></i>
+        </div>
+
+    </div>
+</div>

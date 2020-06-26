@@ -1,0 +1,39 @@
+<div class="row mt-3">
+    <div class="col-12 animated fadeIn slow">
+        <h1>Héroe <small>nombre del héroe</small></h1>
+        <hr>
+    </div>
+    <div class="col-12">
+        <button type="button" class="btn btn-outline-danger btn-sm mb-2 animated fadeInLeftBig faster float-right" routerLink="/heroes">
+            <li class="fa fa-arrow-left"></li>
+             Regresar
+        </button>
+    </div>
+</div>
+
+<div class="row animated fadeInDownBig">
+    <div class="col">
+        <form (ngSubmit)="guardarHeroe(f)" #f="ngForm">
+            <div class="form-group">
+                <label for="firebaseid">Firebase ID</label>
+                <input type="text" class="form-control" id="firebaseid" name="id" aria-describedby="Firebase_ID" disabled="disabled" placeholder="Firebase ID" [(ngModel)]="hero.id">
+                <small id="firebaseid" class="form-text text-muted">Esta campo es auto generado</small>
+            </div>
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del héroe" [(ngModel)]="hero.name" required [class.is-invalid]="name.invalid && name.touched" #name="ngModel">
+                <small *ngIf="name.invalid && name.touched" class="form-text text-danger">Ingrese el nombre del heroe</small>
+            </div>
+            <div class="form-group">
+                <label for="name">Poder</label>
+                <input type="text" class="form-control" id="power" name="power" placeholder="Poder del héroe" [(ngModel)]="hero.power">
+            </div>
+            <div class="form-group">
+                <label for="name">Poder</label> <br>
+                <button *ngIf="hero.alive" (click)="hero.alive = false" type="button" class="btn btn-sm btn-outline-success w-50">Vivo <i class="fa fa-smile-o" aria-hidden="true"></i></button>
+                <button *ngIf="!hero.alive" (click)="hero.alive = true" type="button" class="btn btn-sm btn-outline-danger w-50">Muerto <i class="fa fa-frown-o" aria-hidden="true"></i></button>
+            </div>
+            <button type="submit" class="btn btn-primary"><li class="fa fa-save" aria-hidden="true"></li> Guardar</button>
+        </form>
+    </div>
+</div>
